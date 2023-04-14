@@ -1,37 +1,39 @@
--- »ç¿ø Å×ÀÌºí(ºÎ¼­¿Í °ü°è¸¦ ¸ÎÀº)
+-- ì‚¬ì› í…Œì´ë¸”(ë¶€ì„œì™€ ê´€ê³„ë¥¼ ë§ºì€)
 CREATE TABLE employee(
-    empno   NUMBER(3) PRIMARY KEY,     -- »ç¿ø¹øÈ£
-    ename   VARCHAR2(20) NOT NULL,     -- »ç¿øÀÌ¸§
-    sal     NUMBER(10),                -- ±Þ¿©
-    createdate   DATE DEFAULT SYSDATE,  -- µî·ÏÀÏ
+    empno   NUMBER(3) PRIMARY KEY,     -- ì‚¬ì›ë²ˆí˜¸
+    ename   VARCHAR2(20) NOT NULL,     -- ì‚¬ì›ì´ë¦„
+    sal     NUMBER(10),                -- ê¸‰ì—¬
+    createdate   DATE DEFAULT SYSDATE,  -- ë“±ë¡ì¼
     gender  VARCHAR2(10),
     deptno  VARCHAR2(4),
-    -- ¿Ü·¡Å°(FOREIGN KEY) Á¦¾àÁ¶°Ç
+    -- ì™¸ëž˜í‚¤(FOREIGN KEY) ì œì•½ì¡°ê±´
     CONSTRAINT emp_fk FOREIGN KEY(deptno)
     REFERENCES dept(deptno)
-    -- ON DELETE CASCADE(ºÎ¼­¸¦ »èÁ¦ÇÏ¸é ÂüÁ¶ÇÏ°í ÀÖ´Â »ç¿øµµ »èÁ¦)
+    -- ON DELETE CASCADE(ë¶€ì„œë¥¼ ì‚­ì œí•˜ë©´ ì°¸ì¡°í•˜ê³  ìžˆëŠ” ì‚¬ì›ë„ ì‚­ì œ)
 );    
 
--- ÂüÁ¶ ¹«°á¼º Á¦¾à À§¹è
--- 1. »ç¿øÀÌ ¼Ò¼ÓµÈ ºÎ¼­¸¦ »èÁ¦ÇÒ¶§ 'ÀÚ½Ä ·¹ÄÚµå°¡ ÀÖ´Ù'´Â ¿À·ù¹ß»ý
--- 2. ºÎ¼­¹øÈ£°¡ ¾ø´Â »ç¿ø ÀÚ·á¸¦ Ãß°¡ÇÒ ¶§ 'ºÎ¸ðÅ°°¡ ¾ø´Ù'´Â ¿À·ù¹ß»ý
+-- ì°¸ì¡° ë¬´ê²°ì„± ì œì•½ ìœ„ë°°
+-- 1. ì‚¬ì›ì´ ì†Œì†ëœ ë¶€ì„œë¥¼ ì‚­ì œí• ë•Œ 'ìžì‹ ë ˆì½”ë“œê°€ ìžˆë‹¤'ëŠ” ì˜¤ë¥˜ë°œìƒ
+-- 2. ë¶€ì„œë²ˆí˜¸ê°€ ì—†ëŠ” ì‚¬ì› ìžë£Œë¥¼ ì¶”ê°€í•  ë•Œ 'ë¶€ëª¨í‚¤ê°€ ì—†ë‹¤'ëŠ” ì˜¤ë¥˜ë°œìƒ
 
-INSERT INTO employee VALUES (100, 'ÀÌ°­', 2500000, SYSDATE, '³²ÀÚ', '1000');
-INSERT INTO employee VALUES (101, 'ÀÌ»ê', 2000000, SYSDATE, '¿©ÀÚ', '1001');
-INSERT INTO employee VALUES (102, '¹Ú´Þ', 1500000, SYSDATE, '³²ÀÚ', '1002');
-INSERT INTO employee VALUES (103, '°­ÇÏ´Ã', 3500000, SYSDATE, '', '1003');
-INSERT INTO employee VALUES (104, '¾ç¿ìÁÖ', 4500000, SYSDATE, '¿©ÀÚ', '1000');
-INSERT INTO employee VALUES (105, '°­³²', 2600000, SYSDATE, '¿©ÀÚ', '1000');
+INSERT INTO employee VALUES (100, 'ì´ê°•', 2500000, SYSDATE, 'ë‚¨ìž', '1000');
+INSERT INTO employee VALUES (101, 'ì´ì‚°', 2000000, SYSDATE, 'ì—¬ìž', '1001');
+INSERT INTO employee VALUES (102, 'ë°•ë‹¬', 1500000, SYSDATE, 'ë‚¨ìž', '1002');
+INSERT INTO employee VALUES (103, 'ê°•í•˜ëŠ˜', 3500000, SYSDATE, '', '1003');
+INSERT INTO employee VALUES (104, 'ì–‘ìš°ì£¼', 4500000, SYSDATE, 'ì—¬ìž', '1000');
+INSERT INTO employee VALUES (105, 'ê°•ë‚¨', 2600000, SYSDATE, 'ì—¬ìž', '1000');
+INSERT INTO employee VALUES (106, 'ì´í•´', 2500000, SYSDATE, 'ì—¬ìž', '1000');
+commit;
 
--- »ç¿ø ÀÚ·á °Ë»ö
+-- ì‚¬ì› ìžë£Œ ê²€ìƒ‰
 SELECT * FROM employee;
 
--- ¼ºº°ÀÌ ³²ÀÚÀÌ¸é¼­ ±Þ¿©°¡ 250¸¸¿ø ÀÌ»óÀÎ »ç¿øÀ» °Ë»öÇÏ½Ã¿À
+-- ì„±ë³„ì´ ë‚¨ìžì´ë©´ì„œ ê¸‰ì—¬ê°€ 250ë§Œì› ì´ìƒì¸ ì‚¬ì›ì„ ê²€ìƒ‰í•˜ì‹œì˜¤
 SELECT * FROM employee 
-WHERE gender = '³²ÀÚ'
+WHERE gender = 'ë‚¨ìž'
 AND sal >= 2500000;
 
--- ±Þ¿©°¡ 200¸¸¿ø ÀÌ»ó 300¸¸¿ø ÀÌÇÏÀÎ »ç¿øÀ» °Ë»öÇÏ½Ã¿À
+-- ê¸‰ì—¬ê°€ 200ë§Œì› ì´ìƒ 300ë§Œì› ì´í•˜ì¸ ì‚¬ì›ì„ ê²€ìƒ‰í•˜ì‹œì˜¤
 SELECT * FROM employee 
 WHERE sal >= 2000000 
 AND sal <= 3000000;
@@ -42,28 +44,27 @@ FROM employee
 WHERE sal BETWEEN 2000000 
 AND 3000000;
 
--- ¹®ÀÚ¿­ °Ë»ö : ÀÏºÎ ¹®ÀÚ Æ÷ÇÔ LIKE %¹®ÀÚ%
--- ¼ºÀÌ 'ÀÌ'ÀÎ »ç¿øÀ» °Ë»öÇÏ½Ã¿À
+-- ë¬¸ìžì—´ ê²€ìƒ‰ : ì¼ë¶€ ë¬¸ìž í¬í•¨ LIKE %ë¬¸ìž%
+-- ì„±ì´ 'ì´'ì¸ ì‚¬ì›ì„ ê²€ìƒ‰í•˜ì‹œì˜¤
 SELECT * 
 FROM employee
-WHERE ename LIKE 'ÀÌ%';
+WHERE ename LIKE 'ì´%';
 
--- »ç¿ø ÃÑ ÀÎ¿ø¼ö¸¦ ±¸ÇÏ½Ã¿À
-SELECT COUNT(*) as »ç¿ø¼ö
+-- ì‚¬ì› ì´ ì¸ì›ìˆ˜ë¥¼ êµ¬í•˜ì‹œì˜¤
+SELECT COUNT(*) as ì‚¬ì›ìˆ˜
 FROM employee;
 
--- Áßº¹¾øÀÌ ºÎ¼­¹øÈ£¸¦ °Ë»öÇÏ½Ã¿À (DISTINCT Å°¿öµå)
-SELECT DISTINCT deptno ºÎ¼­¹øÈ£
+-- ì¤‘ë³µì—†ì´ ë¶€ì„œë²ˆí˜¸ë¥¼ ê²€ìƒ‰í•˜ì‹œì˜¤ (DISTINCT í‚¤ì›Œë“œ)
+SELECT DISTINCT deptno ë¶€ì„œë²ˆí˜¸
 FROM employee;
 
--- GROUP BY Àý(¼Ò¼Óµî ±×·ìÈ­), HAVING »ç¿ë
--- ºÎ¼­º° ±Þ¿© ÃÑ¾×À» ±¸ÇÏ½Ã¿À
-SELECT deptno ºÎ¼­, SUM(sal) ±Þ¿©ÃÑ¾×, AVG(sal) ±Þ¿©Æò±Õ
-FROM employee               --FROMÀý 1¹ø
+-- GROUP BY ì ˆ(ì†Œì†ë“± ê·¸ë£¹í™”), HAVING ì‚¬ìš©
+-- ë¶€ì„œë³„ ê¸‰ì—¬ ì´ì•¡ì„ êµ¬í•˜ì‹œì˜¤
+SELECT deptno ë¶€ì„œ, SUM(sal) ê¸‰ì—¬ì´ì•¡, AVG(sal) ê¸‰ì—¬í‰ê· 
+FROM employee               --FROMì ˆ 1ë²ˆ
 GROUP BY deptno            
 HAVING AVG(sal) >= 3000000
-ORDER BY AVG(sal) DESC;     -- Á¤·ÄÀÌ 5¹ø(ORDER BY)
-
+ORDER BY AVG(sal) DESC;     -- ì •ë ¬ì´ 5ë²ˆ(ORDER BY)
 
 
 

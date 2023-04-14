@@ -1,17 +1,14 @@
--- ¹®ÀÚ ÀÚ·áÇü ºñ±³
-CREATE TABLE ex1(
-    column1 CHAR(10),    -- °íÁ¤±æÀÌ ÀÚ·áÇü
-    column2 VARCHAR2(10) -- °¡º¯±æÀÌ ÀÚ·áÇü
+-- ë¬¸ì ìë£Œí˜• ë¹„êµ
+create table ex1(
+    column1 CHAR(10),
+    column2 VARCHAR2(10)
 );
 
+-- ìë£Œì¶”ê°€
+INSERT into ex1(column1, column2) VALUES ('abc', 'abx');
+insert into ex1 values ('ê°•ë‚¨', 'ê°•ë‚¨');
+-- ìë£Œ ì¡°íšŒ
+select column1, length(column1) len1, column2, length(column2) len2
+from ex1;
 
--- ÀÚ·á Ãß°¡
-INSERT INTO ex1(column1, column2) VALUES ('abc', 'abc');
-INSERT INTO ex1 VALUES ('°­³²', '°­³²');
-
--- ÀÚ·á Á¶È¸
-SELECT column1, LENGTH(column1) len1, column2, LENGTH(column2) len2
-FROM ex1;
-
--- Ä¿¹Ô (»ğÀÔ, ¼öÁ¤, »èÁ¦°¡ ÀÖÀ¸¸é ÇØÁÖ±â)
-COMMIT;
+commit;

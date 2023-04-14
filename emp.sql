@@ -1,73 +1,72 @@
--- »ç¿ø Å×ÀÌºí
+-- ì‚¬ì› í…Œì´ë¸”
 CREATE TABLE emp(
-    -- Ä®·³ ÀÌ¸§  ÀÚ·áÇü
-    empno   NUMBER(3) PRIMARY KEY,     -- »ç¿ø¹øÈ£
-    ename   VARCHAR2(20) NOT NULL,     -- »ç¿øÀÌ¸§
-    sal     NUMBER(10),                -- ±Þ¿©
-    createdate   DATE DEFAULT SYSDATE  -- µî·ÏÀÏ
+    -- ì¹¼ëŸ¼ ì´ë¦„  ìžë£Œí˜•
+    empno   NUMBER(3) PRIMARY KEY,     -- ì‚¬ì›ë²ˆí˜¸
+    ename   VARCHAR2(20) NOT NULL,     -- ì‚¬ì›ì´ë¦„
+    sal     NUMBER(10),                -- ê¸‰ì—¬
+    createdate   DATE DEFAULT SYSDATE  -- ë“±ë¡ì¼
 );
 
--- »ç¿øÀÇ ¼ºº° Ä®·³ Ãß°¡(ALTER ~ ADD Ä®·³ÀÌ¸§ ÀÚ·áÇü)
+-- ì‚¬ì›ì˜ ì„±ë³„ ì¹¼ëŸ¼ ì¶”ê°€(ALTER ~ ADD ì¹¼ëŸ¼ì´ë¦„ ìžë£Œí˜•)
 ALTER TABLE emp ADD gender VARCHAR2(4);
 
--- »ç¿øÀÇ ÀÚ·áÇüÀ» º¯°æ (MODIFT) VARCHAR2(10)
+-- ì‚¬ì›ì˜ ìžë£Œí˜•ì„ ë³€ê²½ (MODIFT) VARCHAR2(10)
 ALTER TABLE emp MODIFY gender VARCHAR2(10);
 
 DESC emp;
 
--- »ç¿ø Ãß°¡
-INSERT INTO emp VALUES (100, 'ÀÌ°­', 2500000, SYSDATE);
-INSERT INTO emp VALUES (101, '±è»ê', 3000000, SYSDATE);
-INSERT INTO emp VALUES (102, '¿À»ó½Ä', 5000000, SYSDATE);
-INSERT INTO emp VALUES (103, '¹Ú½ÅÀÔ', '', SYSDATE);  -- ÀÚ·á³Ö°í ½ÍÁö¾ÊÀ¸¸é ''
-INSERT INTO emp VALUES (104, '¼­¿ï½Ã', '1500000', SYSDATE, '¿©');
+-- ì‚¬ì› ì¶”ê°€
+INSERT INTO emp VALUES (100, 'ì´ê°•', 2500000, SYSDATE);
+INSERT INTO emp VALUES (101, 'ê¹€ì‚°', 3000000, SYSDATE);
+INSERT INTO emp VALUES (102, 'ì˜¤ìƒì‹', 5000000, SYSDATE);
+INSERT INTO emp VALUES (103, 'ë°•ì‹ ìž…', '', SYSDATE);  -- ìžë£Œë„£ê³  ì‹¶ì§€ì•Šìœ¼ë©´ ''
+INSERT INTO emp VALUES (104, 'ì„œìš¸ì‹œ', '1500000', SYSDATE, 'ì—¬');
 
--- »ç¿ø Á¶È¸
+-- ì‚¬ì› ì¡°íšŒ
 SELECT * FROM emp;
 
--- »ç¿ø¹øÈ£, »ç¿øÀÌ¸§, ±Þ¿©¸¦ °Ë»öÇÏ½Ã¿À
-SELECT empno as »ç¹ø, ename as »ç¿ø¸í, sal as ±Þ¿© FROM emp;
+-- ì‚¬ì›ë²ˆí˜¸, ì‚¬ì›ì´ë¦„, ê¸‰ì—¬ë¥¼ ê²€ìƒ‰í•˜ì‹œì˜¤
+SELECT empno as ì‚¬ë²ˆ, ename as ì‚¬ì›ëª…, sal as ê¸‰ì—¬ FROM emp;
 
--- ±Þ¿©°¡ ¾ø´Â »ç¿øÀ» °Ë»öÇÏ½Ã¿À
+-- ê¸‰ì—¬ê°€ ì—†ëŠ” ì‚¬ì›ì„ ê²€ìƒ‰í•˜ì‹œì˜¤
 SELECT *
 FROM emp
-WHERE sal IS NULL;  -- NULLÀÌ ¾Æ´Ñ ±¸¹®(IS NOT NULL)
+WHERE sal IS NULL;  -- NULLì´ ì•„ë‹Œ êµ¬ë¬¸(IS NOT NULL)
 
--- ±Þ¿©°¡ 300¸¸¿ø ÀÌÇÏÀÎ »ç¿øÀ» ±Þ¿©°¡ ¸¹Àº ¼ø¼­·Î Á¤·ÄÇÏ½Ã¿À
+-- ê¸‰ì—¬ê°€ 300ë§Œì› ì´í•˜ì¸ ì‚¬ì›ì„ ê¸‰ì—¬ê°€ ë§Žì€ ìˆœì„œë¡œ ì •ë ¬í•˜ì‹œì˜¤
 SELECT *
 FROM emp
 WHERE sal <= 3000000
 ORDER BY sal DESC;
 
--- ±Þ¿©°¡ ¸¹Àº ¼ø¼­·Î Á¤·ÄÇÏ½Ã¿À
+-- ê¸‰ì—¬ê°€ ë§Žì€ ìˆœì„œë¡œ ì •ë ¬í•˜ì‹œì˜¤
 SELECT *
 FROM emp
 ORDER BY sal DESC;
 
--- »ç¿øÀÇ ¼ö¸¦ ±¸ÇÏ½Ã¿À
-SELECT COUNT(*) as »ç¿ø¼ö
+-- ì‚¬ì›ì˜ ìˆ˜ë¥¼ êµ¬í•˜ì‹œì˜¤
+SELECT COUNT(*) as ì‚¬ì›ìˆ˜
 FROM emp;
 
--- »ç¿øÀÇ ±Þ¿©ÀÇ ÇÕ°è¿Í Æò±ÕÀ» ±¸ÇÏ½Ã¿À
-SELECT SUM(sal) ±Þ¿©ÇÕ°è, AVG(sal) ±Þ¿©Æò±Õ
+-- ì‚¬ì›ì˜ ê¸‰ì—¬ì˜ í•©ê³„ì™€ í‰ê· ì„ êµ¬í•˜ì‹œì˜¤
+SELECT SUM(sal) ê¸‰ì—¬í•©ê³„, AVG(sal) ê¸‰ì—¬í‰ê· 
 FROM emp;
 
--- ÀÌ¸§ÀÌ ¼­¿ï½ÃÀÎ »ç¿øÀ» °Ë»öÇÏ½Ã¿À
+-- ì´ë¦„ì´ ì„œìš¸ì‹œì¸ ì‚¬ì›ì„ ê²€ìƒ‰í•˜ì‹œì˜¤
 SELECT * FROM emp 
 WHERE empno = 104;
 
--- ¼ºº°ÀÌ '¿©'ÀÎ »ç¿øÀ» '¿©ÀÚ'·Î º¯°æÇÏ½Ã¿À(ÀÚ·á ¼öÁ¤)
+-- ì„±ë³„ì´ 'ì—¬'ì¸ ì‚¬ì›ì„ 'ì—¬ìž'ë¡œ ë³€ê²½í•˜ì‹œì˜¤(ìžë£Œ ìˆ˜ì •)
 UPDATE emp 
-SET gender = '¿©ÀÚ'
+SET gender = 'ì—¬ìž'
 WHERE empno = 104;
 
--- »ç¿øÀÌ¸§ÀÌ ¼­¿ï½ÃÀÎ »ç¿ø »èÁ¦
+-- ì‚¬ì›ì´ë¦„ì´ ì„œìš¸ì‹œì¸ ì‚¬ì› ì‚­ì œ
 DELETE FROM emp
-WHERE ename = '¼­¿ï½Ã';
+WHERE ename = 'ì„œìš¸ì‹œ';
 
 
 COMMIT;
--- COMMIT ÀüÀÌ¸é º¹¿ø °¡´É(ROLLBACK °¡´É)
+-- COMMIT ì „ì´ë©´ ë³µì› ê°€ëŠ¥(ROLLBACK ê°€ëŠ¥)
 ROLLBACK;
-
 

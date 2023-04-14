@@ -1,31 +1,28 @@
--- customer Å×ÀÌºí(°í°´¹øÈ£, ÀÌ¸§, ÁÖ¼Ò, ÀüÈ­¹øÈ£)
-CREATE TABLE customer(
-    custid  NUMBER PRIMARY KEY,
-    name    VARCHAR2(40) NOT NULL,
+-- customer í…Œì´ë¸”(ê³ ê°ë²ˆí˜¸, ì´ë¦„, ì£¼ì†Œ, ì „í™”ë²ˆí˜¸)
+create table customer(
+    custid number primary key,
+    name VARCHAR2(40)not null,
     address VARCHAR2(50),
-    phone   VARCHAR2(20)
+    phone VARCHAR2(20)
 );
 
--- customer ÀÚ·áÃß°¡
-INSERT INTO customer VALUES (1, '¹ÚÁö¼º', '¿µ±¹ ¸ÇÃ¼½ºÅÍ', '000-5000-0001');
-INSERT INTO customer VALUES (2, '±è¿¬¾Æ', '´ëÇÑ¹Î±¹ ¼­¿ï', '000-6000-0001');
-INSERT INTO customer VALUES (3, '¾È»ê', '´ëÇÑ¹Î±¹ ±¤ÁÖ±¤¿ª½Ã', '000-7000-0001');
-INSERT INTO customer VALUES (4, '·ùÇöÁø', '¹Ì±¹ Åä·ĞÅä', NULL);
-INSERT INTO customer VALUES (5, '¼ÕÈï¹Î', '¿µ±¹ ÅäÆ®³Ñ', '000-8000-0001');
+insert into customer values(1, 'ë°•ì§€ì„±' ,'ì˜êµ­ ë§¨ì²´ìŠ¤í„°', '000-5000-0001');
+insert into customer values(2, 'ê¹€ì—°ì•„' ,'ëŒ€í•œë¯¼êµ­ ì„œìš¸', '000-6000-0001');
+insert into customer values(3, 'ì•ˆì‚°' ,'ëŒ€í•œë¯¼êµ­ ê´‘ì£¼ê´‘ì—­ì‹œ', '000-7000-0001');
+insert into customer values(4, 'ë¥˜í˜„ì§„' ,'ë¯¸êµ­ í† ë¡ í† ', null);
+insert into customer values(5, 'ì†í¥ë¯¼' ,'ì˜êµ­ í† íŠ¸ë„˜', '000-8000-0001');
+insert into customer values(6, 'ê¹€í•˜ëŠ˜' ,'ëŒ€í•œë¯¼êµ­ ì„±ë‚¨ì‹œ', '000-9000-0001');
+insert into customer values(7, 'ë°•ëŒ€ì–‘' ,'ëŒ€í•œë¯¼êµ­ ìš©ì¸ì‹œ', '000-9000-0002');
+insert into customer values(6, 'ê¹€í•˜ëŠ˜' ,'ëŒ€í•œë¯¼êµ­ ì„±ë‚¨ì‹œ', '000-9000-0001');
+insert into customer values(7, 'ë°•ëŒ€ì–‘' ,'ëŒ€í•œë¯¼êµ­ ìš©ì¸ì‹œ', '000-9000-0002');
 
-SELECT * FROM customer;
+select * from customer;
 
--- ÀüÈ­¹øÈ£°¡ ¾ø´Â °í°´À» Ã£À¸½Ã¿À
-SELECT *
-FROM customer
-WHERE phone IS NULL;
+-- ì „í™”ë²ˆí˜¸ê°€ ì—†ëŠ” ê³ ê°ì„ ì°¾ìœ¼ì‹œì˜¤
+select * from customer where phone is null;
 
--- ÁÖ¼Ò°¡ ´ëÇÑ¹Î±¹ÀÎ °í°´À» °Ë»öÇÏ½Ã¿À
-SELECT *
-FROM customer
-WHERE address LIKE '´ëÇÑ¹Î±¹%';
+-- ì£¼ì†Œê°€ ëŒ€í•œë¯¼êµ­ ì¸ ê³ ê°ì„ ì°¾ìœ¼ì‹œì˜¤
+select * from customer where address like '%ëŒ€í•œë¯¼êµ­%';
 
--- °í°´À» ÀÌ¸§¼øÀ¸·Î Á¤·ÄÇÏ½Ã¿À(¿À¸§Â÷¼ø[ASC] / ³»¸²Â÷¼ø[DESC])
-SELECT *
-FROM customer
-ORDER BY name;
+commit;
+

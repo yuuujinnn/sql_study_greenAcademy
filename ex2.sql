@@ -1,17 +1,14 @@
--- ³¯Â¥ ÀÚ·áÇü
-CREATE TABLE ex2(
-    col_date  DATE,
-    col_timestamp  TIMESTAMP
+-- ë‚ ì§œ ìë£Œí˜•
+create table ex2(
+    col_date date,
+    col_timestamp TIMESTAMP
 );
+-- hire_date varchar2(20);
+-- insert into ex2 values ('2023-01-25');
 
--- hire_date VARCHAR2(20)
--- INSERT INTO ex2 VALUES ('2023-01-25');
+-- ìë£Œ ì‚½ì…
+insert into ex2 values (sysdate, systimestamp);
+insert into ex2 values (sysdate, systimestamp);
 
-
--- ÀÚ·á »ğÀÔ
-INSERT INTO ex2 VALUES (SYSDATE, SYSTIMESTAMP);
-INSERT INTO ex2 VALUES (SYSDATE, SYSTIMESTAMP);
-
-
--- ÀÚ·á °Ë»ö
-SELECT * FROM ex2;
+-- ìë£Œ ê²€ìƒ‰
+select * from ex2;

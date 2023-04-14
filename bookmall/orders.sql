@@ -1,85 +1,72 @@
--- order Å×ÀÌºí(ÁÖ¹®¹øÈ£, °í°´¹øÈ£, µµ¼­¹øÈ£, ÆÇ¸Å°¡°Ý, ÁÖ¹®ÀÏ)
-CREATE TABLE orders (
-    orderid NUMBER PRIMARY KEY,
-    custid  NUMBER NOT NULL,
-    bookid  NUMBER NOT NULL,
-    saleprice NUMBER,
-    orderdate DATE,
-    -- ¿Ü·¡Å° ¼³Á¤
-    CONSTRAINT cus_fk FOREIGN KEY(custid)
+-- order í…Œì´ë¸”
+create table orders(
+    orderid number primary key,
+    custid number not null,
+    bookid number not null,
+    salprice number,
+    orderdate date,
+    CONSTRAINT cus_fk foreign key(custid)
     REFERENCES customer(custid),
-    CONSTRAINT book_fk FOREIGN KEY(bookid)
+    CONSTRAINT book_fk FOREIGN key(bookid)
     REFERENCES book(bookid)
 );
 
--- orders ÀÚ·á »ðÀÔ
-INSERT INTO orders VALUES (1, 1, 1, 6000, TO_DATE('2018-07-01', 'YYYY-MM-DD'));
-INSERT INTO orders VALUES (2, 1, 3, 21000, TO_DATE('2018-07-03', 'YYYY-MM-DD'));
-INSERT INTO orders VALUES (3, 2, 5, 8000, TO_DATE('2018-07-03', 'YYYY-MM-DD'));
-INSERT INTO orders VALUES (4, 3, 6, 6000, TO_DATE('2018-07-04', 'YYYY-MM-DD'));
-INSERT INTO orders VALUES (5, 4, 7, 20000, TO_DATE('2018-07-05', 'YYYY-MM-DD'));
-INSERT INTO orders VALUES (6, 1, 2, 12000, TO_DATE('2018-07-07', 'YYYY-MM-DD'));
-INSERT INTO orders VALUES (7, 4, 8, 13000, TO_DATE('2018-07-07', 'YYYY-MM-DD'));
-INSERT INTO orders VALUES (8, 3, 10, 12000, TO_DATE('2018-07-08', 'YYYY-MM-DD'));
-INSERT INTO orders VALUES (9, 2, 10, 7000, TO_DATE('2018-07-09', 'YYYY-MM-DD'));
-INSERT INTO orders VALUES (10, 3, 8, 13000, TO_DATE('2018-07-10', 'YYYY-MM-DD'));
--- INSERT INTO orders VALUES (11, 5, 11, 13000, TO_DATE('2018-07-10', 'YYYY-MM-DD'));
+select * from orders;
 
+-- orders ìžë£Œ ì‚½ìž…
+insert into orders values(1,1,1,6000,to_date('2018-07-01', 'yyyy-mm-dd'));
+insert into orders values(2,1,3,21000,to_date('2018-07-03', 'yyyy-mm-dd'));
+insert into orders values(3,2,5,8000,to_date('2018-07-03', 'yyyy-mm-dd'));
+insert into orders values(4,3,6,6000,to_date('2018-07-04', 'yyyy-mm-dd'));
+insert into orders values(5,4,7,20000,to_date('2018-07-05', 'yyyy-mm-dd'));
+insert into orders values(6,1,2,12000,to_date('2018-07-07', 'yyyy-mm-dd'));
+insert into orders values(7,1,8,13000,to_date('2018-07-07', 'yyyy-mm-dd'));
+insert into orders values(8,2,10,12000,to_date('2018-07-08', 'yyyy-mm-dd'));
+insert into orders values(9,2,10,6000,to_date('2018-07-09', 'yyyy-mm-dd'));
+insert into orders values(10,3,8,20000,to_date('2018-07-10', 'yyyy-mm-dd'));
 
-SELECT * FROM orders;
+commit;
 
--- °í°´ÀÌ ÁÖ¹®ÇÑ µµ¼­ÀÇ ÃÑ ÆÇ¸Å¾×À» ±¸ÇÏ½Ã¿À
-SELECT SUM(saleprice) ÃÑÆÇ¸Å¾×, AVG(saleprice) Æò±Õ±Ý¾×
-FROM orders;
+-- ê³ ê°ì´ ì£¼ë¬¸í•œ ë„ì„œì˜ ì´ íŒë§¤ì•¡ì„ êµ¬í•˜ì‹œì˜¤
+select sum(salprice) ì´íŒë§¤ì•¡, avg(salprice) í‰ê· ê¸ˆì•¡ from orders;
 
--- ¼­Á¡ÀÇ µµ¼­ ÆÇ¸Å °Ç¼ö¸¦ ±¸ÇÏ½Ã¿À
-SELECT COUNT(*) ÃÑÆÇ¸Å°Ç¼ö
-FROM orders;
+-- ì„œì ì˜ ë„ì„œ íŒë§¤ ê±´ìˆ˜ë¥¼ êµ¬í•˜ì‹œì˜¤
+select count(*)ì´íŒë§¤ê±´ìˆ˜ from orders;
+-- 2ë²ˆ ê³ ê°ì˜ ì£¼ë¬¸ ë‚´ì—­
 
--- 2¹ø °í°´ÀÇ ÁÖ¹®³»¿ª °Ë»öÇÏ±â
-SELECT *
-FROM orders
-WHERE custid = 2;
+-- 2ë²ˆ ê³ ê°(ê¹€ì—°ì•„)ì´ ì£¼ë¬¸í•œ ë„ì„œì˜ì´ íŒë§¤ì•¡ì„ êµ¬í•˜ì‹œì˜¤
+select * from orders where custid = 2;
 
--- 2¹ø °í°´(±è¿¬¾Æ)ÀÌ ÁÖ¹®ÇÑ µµ¼­ÀÇ ÃÑ ÆÇ¸Å¾×À» ±¸ÇÏ½Ã¿À
-SELECT SUM(saleprice) ÃÑ¸ÅÃâ
-FROM orders
-WHERE custid = 2;
+select sum(salprice) ì´ë§¤ì¶œ from orders where custid = 2;
 
--- °¡°ÝÀÌ 8000¿ø ÀÌ»óÀÎ µµ¼­¸¦ ±¸¸ÅÇÑ °í°´º° ÁÖ¹®µµ¼­ÀÇ ÃÑ ¼ö·®À» ±¸ÇÏ½Ã¿À
--- ´Ü, 2±Ç ÀÌ»ó ±¸¸ÅÇÑ °í°´¸¸ Ã£À¸½Ã¿À
-SELECT custid, COUNT(*) ÃÑ¼ö·® 
-FROM orders
-WHERE saleprice >= 8000
-GROUP BY custid
-HAVING COUNT(*) >= 2;
+-- ì¡°ì¸ (1ê°œ í…Œì´ë¸” ì´ìƒ ì—°ê²°í•˜ëŠ” ë²•)
+select cus.name, ord.salprice, ord.orderdate
+from orders ord, customer cus
+where ord.custid = cus.custid
+and cus.name = 'ê¹€ì—°ì•„';
 
+-- ê³ ê°ë³„ë¡œ ì£¼ë¬¸í•œ ë„ì„œì˜ ì´ íŒë§¤ì•¡ì„ êµ¬í•˜ì‹œì˜¤
+select cus.name, sum(ord.salprice)
+from orders ord, customer cus
+where ord.custid = cus.custid
+and cus.name = 'ê¹€ì—°ì•„'
+group by cus.name;
 
--- Á¶ÀÎ(1°³ Å×ÀÌºí ÀÌ»ó ¿¬°áÇÏ´Â ±â¹ý)
-SELECT cus.name, cus.phone, ord.saleprice, ord.orderdate
-FROM orders ord, customer cus
-WHERE ord.custid = cus.custid
-AND cus.name = '±è¿¬¾Æ';
+-- ì§‘ê³„ë¥¼ êµ¬í• ë•ŒëŠ” GROUP BY ì ˆ ì‚¬ìš©, ì¡°ê±´ì€ HAVINGì ˆ ì‚¬ìš©
+select cus.name as ì´ë¦„, sum(ord.salprice) ì´êµ¬ë§¤ì•¡
+from orders ord, customer cus
+where ord.custid = cus.custid
+group by cus.name
+having cus.name = 'ë°•ì§€ì„±';
 
--- °í°´ ÀÌ¸§º°·Î ÁÖ¹®ÇÑ µµ¼­ÀÇ ÃÑ ÆÇ¸Å¾×À» ±¸ÇÏ½Ã¿À
--- Áý°è¸¦ ±¸ÇÒ¶§´Â GROUPBY Àý »ç¿ë
--- HAVING ÀýÀº GROUP BYÀÇ ÁúÀÇ °á°ú ³ªÅ¸³»´Â ±×·ìÀ» Á¦ÇÑÇÏ´Â ¿ªÇÒ
-SELECT cus.name, SUM(ord.saleprice)
-FROM orders ord, customer cus
-WHERE ord.custid = cus.custid
-GROUP BY cus.name
-HAVING cus.name = '¹ÚÁö¼º';
-
-COMMIT;
-
-
-
-
-
-
-
-
-
-
-
-
+-- ê°€ê²©ì´ 8000ì› ì´ìƒì¸ ë„ì„œë¥¼ êµ¬ë§¤í•œ ê³ ê°ë³„ ì£¼ë¬¸ë„ì„œì˜ ì´ ìˆ˜ëŸ‰ì„ êµ¬í•˜ì‹œì˜¤
+select count(*)
+from orders
+where salprice >= 8000
+group by custid;
+-- ë‹¨ 2ê¶Œ ì´ìƒ êµ¬ë§¤í•œ ê³ ê°ë§Œ ì°¾ìœ¼ì‹œì˜¤.
+select count(*)
+from orders
+where salprice >=8000
+group by custid
+having count(*) >=2;

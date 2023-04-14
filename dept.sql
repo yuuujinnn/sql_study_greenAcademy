@@ -1,48 +1,48 @@
--- �μ� ���̺�(dept)
+-- 부서 테이블(dept)
 CREATE TABLE dept(
-    -- Į���̸� �ڷ���
-    deptno  VARCHAR2(4) PRIMARY KEY,  -- �ߺ��˻� ����
+    -- 칼럼이름 자료형
+    deptno  VARCHAR2(4) PRIMARY KEY,  -- 중복검색 방지
     deptname    VARCHAR2(20) NOT NULL,
     office  VARCHAR2(10)
 );
 
--- �̻� ���� �ذ�
--- �μ��ڵ� : �ĺ���(Identifier) - �⺻Ű(PRIMARY KEY) �Ӽ� �߰�
--- �μ��� : �ʼ� �Է� ���� (NOT NULL �Ӽ� �߰�)
+-- 이상 현상 해결
+-- 부서코드 : 식별자(Identifier) - 기본키(PRIMARY KEY) 속성 추가
+-- 부서명 : 필수 입력 사항 (NOT NULL 속성 추가)
 
 DESC dept;
 
--- �μ� �߰�
-INSERT INTO dept(deptno, deptname, office) VALUES ('1000', '�λ���', '����');
-INSERT INTO dept(deptno, deptname, office) VALUES ('1001', '������', '����');
-INSERT INTO dept(deptno, deptname, office) VALUES ('1002', '������', '����');
-INSERT INTO dept(deptno, deptname) VALUES ('1003', '������');
+-- 부서 추가
+INSERT INTO dept(deptno, deptname, office) VALUES ('1000', '인사팀', '서울');
+INSERT INTO dept(deptno, deptname, office) VALUES ('1001', '전산팀', '수원');
+INSERT INTO dept(deptno, deptname, office) VALUES ('1002', '전산팀', '수원');
+INSERT INTO dept(deptno, deptname) VALUES ('1003', '영업팀');
 
--- ���� �Ϸ� : Ʈ������� �Ѻκ�
+-- 실행 완료 : 트랜잭션의 한부분
 COMMIT;
 
--- �μ� �ڷ� �˻� (as ��Ī - alias)
+-- 부서 자료 검색 (as 별칭 - alias)
 SELECT * FROM dept;
-SELECT deptno as �μ��ڵ�, deptname as �μ��� FROM dept;
+SELECT deptno as 부서코드, deptname as 부서명 FROM dept;
 
--- Ư���� �ڷ� �˻� : WHERE �� ����
+-- 특정한 자료 검색 : WHERE 절 조건
 SELECT * FROM dept
 WHERE deptno = '1002';
 
--- �ڷ� ���� : ORDER BY Į���� (ASC/DESC)
+-- 자료 정렬 : ORDER BY 칼럼명 (ASC/DESC)
 SELECT * FROM dept
 ORDER BY deptno DESC;
 
--- �μ���ȣ�� 1002�� �μ��� 'ȸ����'���� �����Ͻÿ�
+-- 부서번호가 1002인 부서를 '회계팀'으로 변경하시오
 UPDATE dept
-SET deptname = 'ȸ����'
+SET deptname = '회계팀'
 WHERE deptno = 1002;
 
--- �˻�
+-- 검색
 SELECT * FROM dept;
 
 
-/* �μ� ���̺� ���� */
+/* 부서 테이블 삭제 */
 
 DELETE FROM dept
 WHERE deptno = '1003';
